@@ -22,7 +22,7 @@ FROM `bigquery-public-data.baseball.schedules`
 WHERE startTime BETWEEN "2016-05-01 00:00:00" AND "2016-06-30 23:59:59"; 
 
 
-/* DESAFIO: No mesmo dataset anterior, descubra o nome dos times que 
+/* No mesmo dataset anterior, descubra o nome dos times que 
 tenham somente 6 caracteres, usando o like. Retorne de forma única. */ 
 SELECT DISTINCT 
 homeTeamName 
