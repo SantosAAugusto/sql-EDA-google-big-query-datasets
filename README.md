@@ -1,6 +1,6 @@
 # Objective
 This repository have the objective of explain how to proceed with Exploration Data Analysis (EDA), using SQL, answering questions
-of a diversity amount of Google BigQuery Datasets 
+of a diversity amount of Google BigQuery Datasets.
 
 ---
 
