@@ -8,6 +8,8 @@ of a diversity amount of Google BigQuery Datasets.
 Previously, questions were elaborated, trying to simulate real questions about real datasets.
 After, using SQL, those questions were answered with queries.
 
+---
+
 ## Google BigQuery
 Google BigQuery is a fully managed, cloud-based data warehouse designed for real-time analysis of large datasets. It uses a serverless architecture, meaning no infrastructure, scalability, or maintenance concerns. Supporting standard SQL, BigQuery can process terabytes of data in seconds, making it ideal for fast and efficient analytics.
 
@@ -37,8 +39,12 @@ Log Monitoring: IT projects can process and analyze large volumes of logs to ide
 
 Machine Learning Projects: Data science teams can use BigQuery ML to build predictive models directly in the database.
 
+---
+
 ## License
 This project is licensed under the [MIT License].(LICENSE). You are free to use, modify, and share this project.
+
+---
 
 ## About Me
 Hi there! I'm Antonio, an Agronomist who always focus on data to solve any problem. Enjoy this journey with me.
