@@ -8,10 +8,10 @@ After, using SQL, those questions were answered with queries.
 
 ---
 
-## Google BigQuery
+# Google BigQuery
 Google BigQuery is a fully managed, cloud-based data warehouse designed for real-time analysis of large datasets. It uses a serverless architecture, meaning no infrastructure, scalability, or maintenance concerns. Supporting standard SQL, BigQuery can process terabytes of data in seconds, making it ideal for fast and efficient analytics.
 
-### How is Google BigQuery useful for businesses and projects?
+## How is Google BigQuery useful for businesses and projects?
 Large-Scale Data Analysis:
 Businesses can analyze massive datasets (e.g., logs, transactions, IoT data) quickly and efficiently without complex infrastructure.
 
@@ -30,7 +30,7 @@ Data and queries can be easily shared across teams, enhancing collaboration in d
 Learning and Development:
 For professionals and students, BigQuery is an excellent tool for training SQL and data analysis skills due to its simplicity and processing power.
 
-### Use Cases
+## Use Cases
 Sales Analysis: Businesses can analyze sales trends, identify patterns, and make data-driven decisions.
 
 Log Monitoring: IT projects can process and analyze large volumes of logs to identify issues or optimize performance.
@@ -39,10 +39,10 @@ Machine Learning Projects: Data science teams can use BigQuery ML to build predi
 
 ---
 
-## License
+# License
 This project is licensed under the [MIT License].(LICENSE). You are free to use, modify, and share this project.
 
 ---
 
-## About Me
+# About Me
 Hi there! I'm Antonio, an Agronomist who always focus on data to solve any problem. Enjoy this journey with me.
