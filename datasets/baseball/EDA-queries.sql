@@ -28,3 +28,30 @@ SELECT DISTINCT
 homeTeamName 
 FROM `bigquery-public-data.baseball.schedules` 
 WHERE homeTeamName LIKE '______';
+
+
+/* Retorne em uma só consulta os valores de média, máximo, mínimo, contagem e soma do campo “attendance” da tabela 
+“schedules”, dataset “baseball”, mesmo que a contagem e a soma de torcedores 
+nos estádios não tenham significado para análise de negócio. */ 
+SELECT
+avg(attendance) media, 
+max(attendance) maximo, 
+min(attendance) minimo, 
+COUNT(attendance) contagem, 
+sum(attendance) soma 
+FROM `bigquery-public-data.baseball.schedules` 
+WHERE status = "closed"; 
+
+
+/* No mesmo dataset e tabela do exercício anterior, retornar a quantidade de jogos disputados por 
+cada time em casa por anoe também a soma de minutos jogados em casa por ano. Ordenar de forma decrescente 
+pelo ano e depois crescente pelo nome do time. */ 
+SELECT 
+COUNT(gameId) AS jogos, 
+sum(duration_minutes) AS soma_minutos, 
+homeTeamName, 
+year 
+FROM `bigquery-public-data.baseball.schedules` 
+WHERE status = "closed" 
+GROUP BY 3,4 
+ORDER BY YEAR DESC, homeTeamName ASC;
