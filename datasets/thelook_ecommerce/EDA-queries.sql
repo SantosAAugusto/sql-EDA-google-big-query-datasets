@@ -52,40 +52,40 @@ JOIN `bigquery-public-data.thelook_ecommerce.orders` o ON u.id =
 o.user_id;
 
 
-/* Procure o dataset “thelook_ecommerce”. Calcule o tempo em dias da 
+/* Calcule o tempo em dias da 
 data de cadastro até a última compra de cada usuário. */ 
-select 
+SELECT 
 u.id, 
-max(timestamp_diff(o.created_at, u.created_at, day)) as 
+max(timestamp_diff(o.created_at, u.created_at, day)) AS 
 dias_ate_ultima_compra 
-from bigquery-public-data.thelook_ecommerce.orders o 
-join bigquery-public-data.thelook_ecommerce.users u on u.id = o.user_id 
-group by 1 
-order by 2 desc; 
+FROM bigquery-public-data.thelook_ecommerce.orders o 
+JOIN bigquery-public-data.thelook_ecommerce.users u ON u.id = o.user_id 
+GROUP BY 1 
+ORDER BY 2 DESC; 
 
 
 /* Na mesma tabela, calcule o tempo em dias entre a primeira e a última 
 compra de cada usuário. */ 
-select 
+SELECT 
 user_id, 
-timestamp_diff(max(created_at), min(created_at), day) as 
+timestamp_diff(max(created_at), min(created_at), day) AS 
 dias_entre_prim_ult 
-from bigquery-public-data.thelook_ecommerce.orders 
-group by 1 
-order by 2 desc; 
+FROM bigquery-public-data.thelook_ecommerce.orders 
+GROUP BY 1 
+ORDER BY 2 DESC; 
 
 
 /* No mesmo dataset, e tabela de eventos, traga a quantidade de 
 registros para cada usuário entre 06 de maio de 2023 - 73 dias e 09 de 
 maio de 2023 nos eventos de carrinho e compra. Ordene por usuário e tipo 
 do evento. */ 
-select 
+SELECT 
 user_id, 
 event_type, 
-count(distinct id) as eventos 
-from bigquery-public-data.thelook_ecommerce.events 
-where event_type in ('cart', 'purchase') and date(created_at) between 
-date_sub('2023-05-06', interval 73 day) and '2023-05-09' 
-and user_id is not null 
-group by 1,2 
-order by user_id, event_type;
+COUNT(distinct id) AS eventos 
+FROM bigquery-public-data.thelook_ecommerce.events 
+WHERE event_type IN ('cart', 'purchase') AND date(created_at) BETWEEN 
+date_sub('2023-05-06', interval 73 day) AND '2023-05-09' 
+AND user_id IS NOT NULL 
+GROUP BY 1,2 
+ORDER BY user_id, event_type;
