@@ -17,6 +17,7 @@ order_id,
 status 
 FROM `bigquery-public-data.thelook_ecommerce.orders` 
 WHERE status = "Shipped" OR status = "Processing"; 
+/*OU*/
 SELECT 
 order_id, 
 status 
@@ -89,3 +90,46 @@ date_sub('2023-05-06', interval 73 day) AND '2023-05-09'
 AND user_id IS NOT NULL 
 GROUP BY 1,2 
 ORDER BY user_id, event_type;
+
+
+/* Traga os usuários que não tem compra em dezembro de 2022. */ 
+SELECT DISTINCT
+u.id 
+FROM bigquery-public-data.thelook_ecommerce.users u 
+LEFT JOIN bigquery-public-data.thelook_ecommerce.orders o ON u.id = 
+o.user_id AND date(o.created_at) BETWEEN "2022-12-01" AND "2022-12-31" 
+WHERE o.user_id IS NULL; 
+
+
+/* Traga informações resumidas sobre os usuários (de todos, tendo ou não compras). Id do usuário,
+quantidade de compras realizadas, quantidade de itens comprados, ticket médio, quantidade de produtos distintos comprados,
+centro de distribuições dos quais o usuário recebeu produtos, quantidade de criações de carrinho. */ 
+SELECT 
+u.id, 
+tm, 
+compras_realizadas, 
+itens_comprados, 
+produtos_distintos, 
+centros_distribuicao, 
+COUNT(DISTINCT e.id) AS eventos_carrinho 
+FROM bigquery-public-data.thelook_ecommerce.users u 
+LEFT JOIN bigquery-public-data.thelook_ecommerce.events e ON e.user_id = 
+u.id AND event_type = 'cart' 
+LEFT JOIN ( 
+SELECT 
+o.user_id, 
+sum(sale_price)/COUNT(DISTINCT o.order_id) AS tm, 
+COUNT(DISTINCT o.order_id) AS compras_realizadas, 
+COUNT(DISTINCT oi.id) AS itens_comprados, 
+COUNT(DISTINCT p.id) AS produtos_distintos, 
+COUNT(DISTINCT d.id) AS centros_distribuicao 
+FROM bigquery-public-data.thelook_ecommerce.orders o 
+LEFT JOIN bigquery-public-data.thelook_ecommerce.order_items oi ON 
+o.order_id = oi.order_id 
+LEFT JOIN bigquery-public-data.thelook_ecommerce.products p ON p.id = 
+oi.product_id 
+LEFT JOIN bigquery-public-data.thelook_ecommerce.distribution_centers d 
+ON d.id = p.distribution_center_id 
+GROUP BY 1 
+) T ON T.user_id = u.id 
+GROUP BY 1, 2, 3, 4, 5;
